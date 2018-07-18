@@ -1,0 +1,71 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	font-family: "Times New Roman", Times, Serif;
+	background: transparent;
+}
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#seismo_title {
+	height: 5%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: radial-gradient(#3A3AAA, #000011);
+}
+
+#shake_all {
+	height: 95%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: #121212;
+}
+
+.numdisplay {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+
+.numpanel {
+	height: 100%;
+	width: 100%;
+	border: 2px solid;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-left: auto;
+	margin-right: auto;
+	background: #000022;
+	position: relative;
+	float: left;
+	
+}
+.numsep {
+	border-top: 2px solid;
+	border-color: #5F5F5F;
+}
+td {
+	padding: 5px;
+}
+.numval {
+	background: radial-gradient(#000077, #000000);
+	padding-top: 3%;
+	float: center;
+	border-color: #0000FF;
+}

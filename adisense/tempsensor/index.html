@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<head>
+	
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	
+	<title>ADISENSE Temperature Sensor</title></title>
+	
+	<script src="jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="main_style.css">
+	
+	<script type="text/javascript">
+		/*
+		function round (val, deci)
+		{
+			return Number(Math.round(val+'e'+deci)+'e-'deci);
+		}
+		*/
+		function chartupdate(ref_q) {
+			var url_string = "getSamples.php?q=" + ref_q + "&f=0&lt=0";
+			$.ajax({
+				async: true,
+				type: "GET",
+				url: url_string,
+				success: function(data) {
+					if (data.numsamples > 0)
+					{
+						var meter_name = "default";
+						if (ref_q == '0')
+						{
+							meter_name = "gp_pgv";
+						}
+						else if (ref_q == '1')
+						{
+							meter_name = "gp_pga";
+						}
+						else if (ref_q == '2')
+						{
+							meter_name = "adxl_pgv";
+						}
+						else if (ref_q == '3')
+						{
+							meter_name = "adxl_pga";
+						}
+						else if (ref_q == '4')
+						{
+							meter_name = "shake_pgv";
+						}
+						else if (ref_q == '5')
+						{
+							meter_name = "shake_pga";
+						}
+						else if (ref_q == '6')
+						{
+							meter_name = "shake_pgv1";
+						}
+						else if (ref_q == '7')
+						{
+							meter_name = "shake_pga1";
+						}
+						var display_string = Math.round(data.ydata * 10) / 10;
+						document.getElementById(meter_name).innerHTML = display_string.toFixed(1);
+						
+						if ((Math.round(data.ydata)) < 20)
+						{
+							document.getElementById(meter_name).style.color= '#FFFFFF';
+						}
+						else if ((Math.round(data.ydata)) < 40)
+						{
+							document.getElementById(meter_name).style.color= '#00FFFF';
+						}
+						else if ((Math.round(data.ydata)) < 60)
+						{
+							document.getElementById(meter_name).style.color= '#FF6600';
+						}
+						else
+						{
+							document.getElementById(meter_name).style.color= '#FF0000';
+						}
+
+					}
+				},
+				error: function(xhr) {
+				}
+			});
+		}
+	</script>
+	
+</head>
+
+<body>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			//document.getElementById("gp_pga").style.color= '#FFFFFF';
+			
+			setInterval(function() {
+				chartupdate(0);
+				chartupdate(1);
+				chartupdate(2);
+				chartupdate(3);
+				chartupdate(4);
+				chartupdate(5);
+				chartupdate(6);
+				chartupdate(7);
+			}, 5000);
+
+		});
+	</script>
+	
+	<div id="seismo_title"><center><h1 style="color: #FFFFFF; height: 100%; width: 100%; margin-left: 1% font-size: 100%">ADISENSE Temperature Sensor [&deg;C] </h1></center></div>
+	
+	<div id="shake_all">
+		<div class="numdisplay">
+			<table class="numpanel" border = "1">
+				<tr height = "5%">
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 1</h2></center></td>
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 2</h2></center></td>
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 3</h2></center></td>
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 4</h2></center></td>
+				</tr>
+				<tr height = 45% size =300%>
+					<td class="numval"><center><h1 id="gp_pga" style="color: #FFFFFF; height: 30%; width: 100%; font-size:800%">10</h1></center></td>
+					<td class="numval"><center><h1 id="gp_pgv" style="color: #00FFFF; height: 30%; width: 100%; font-size:800%">20</h1></center></td>
+					<td class="numval"><center><h1 id="adxl_pga" style="color: #FF6600; height: 30%; width: 100%; font-size:800%">40</h1></center></td>
+					<td class="numval"><center><h1 id="adxl_pgv" style="color: #FF0000; height: 30%; width: 100%; font-size:800%">60</h1></center></td>
+				</tr>
+
+				<tr height = 5% >
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 5</h2></center></td>
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 6</h2></center></td>
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 7</h2></center></td>
+					<td class="numsep"><center><h2 style="color: #FFFFFF; height: 20%; width: 100%; font-size:200% "> Sensor 8</h2></center></td>
+				</tr>
+				<tr height = 45%>
+					<td class="numval"><center><h1 id="shake_pga" style="color: #FFFFFF; height: 30%; width: 100%; font-size:800%">10</h1></center></td>
+					<td class="numval"><center><h1 id="shake_pgv" style="color: #00FFFF; height: 30%; width: 100%; font-size:800%">20</h1></center></td>
+					<td class="numval"><center><h1 id="shake_pga1" style="color: #FF6600; height: 30%; width: 100%; font-size:800%">40</h1></center></td>
+					<td class="numval"><center><h1 id="shake_pgv1" style="color: #FF0000; height: 30%; width: 100%; font-size:800%">60</h1></center></td>
+				</tr>
+			</table>
+		</div>
+	</div>	
+		
+</body>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<head>
+	
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	
+	<title>Oxygen & Temp Sensor</title></title>
+	
+	<script src="jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="main_style.css">
+	
+	<script type="text/javascript">
+		/*
+		function round (val, deci)
+		{
+			return Number(Math.round(val+'e'+deci)+'e-'deci);
+		}
+		*/
+		function chartupdate(ref_q) {
+			var url_string = "getSamples.php?q=" + ref_q + "&f=0&lt=0";
+			$.ajax({
+				async: true,
+				type: "GET",
+				url: url_string,
+				success: function(data) {
+					if (data.numsamples > 0)
+					{
+						var meter_name = "default";
+						var meter_temp = "default";
+						if (ref_q == '0')
+						{
+							meter_name = "sensor_val_1";
+							meter_temp = "temp_val_1";
+						}
+						else if (ref_q == '1')
+						{
+							meter_name = "sensor_val_2";
+							meter_temp = "temp_val_2";
+						}
+						else if (ref_q == '2')
+						{
+							meter_name = "sensor_val_3";
+							meter_temp = "temp_val_3";
+						}
+						else if (ref_q == '3')
+						{
+							meter_name = "sensor_val_4";
+							meter_temp = "temp_val_4";
+						}
+						else if (ref_q == '4')
+						{
+							meter_name = "sensor_val_5";
+							meter_temp = "temp_val_5";
+						}
+						else if (ref_q == '5')
+						{
+							meter_name = "sensor_val_6";
+							meter_temp = "temp_val_6";
+						}
+						else if (ref_q == '6')
+						{
+							meter_name = "sensor_val_7";
+							meter_temp = "temp_val_7";
+						}
+						else if (ref_q == '7')
+						{
+							meter_name = "sensor_val_8";
+							meter_temp = "temp_val_8";
+						}
+						else if (ref_q == '8')
+						{
+							meter_name = "sensor_val_9";
+							meter_temp = "temp_val_9";
+						}
+						else if (ref_q == '9')
+						{
+							meter_name = "sensor_val_10";
+							meter_temp = "temp_val_10";
+						}
+						else if (ref_q == '10')
+						{
+							h = 14;
+							meter_name = "time_data";
+							var today = new Date(data.ydata);
+							today.setHours(today.getHours() + h);		
+
+							var display_string = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + "  " + today.getHours() +":" +  today.getMinutes() + ":" + today.getSeconds();
+							document.getElementById(meter_name).innerHTML = display_string;						
+						}
+						if (ref_q != '10')
+						{
+							if (data.ydata != -1 && data.ytdata != -1)
+							{	
+								//var factor = [1,1,1,1];
+								//var gain = [110,110,110,110];
+								//var volt_to_concen = 100/7.43;
+								//var precent_concen = data/gain[1]*factor[1]*volt_to_concen*100;
+								//var display_string = Math.round(percent_concen * 10) / 10;
+								
+								var display_string = Math.round(data.ydata * 10) / 10;
+								var display_temp = Math.round(data.ytdata * 10) / 10;
+								
+								
+								text_o2 = document.getElementById(meter_name);
+								text_o2.innerHTML = display_string.toFixed(1)+"%";
+								
+								text_temp = document.getElementById(meter_temp);
+								text_temp.innerHTML = display_temp.toFixed(1)+"&degC";
+								
+								if (((Math.round(data.ydata)) < 16) || ((Math.round(data.ydata)) > 30))
+								{
+									text_o2.innerHTML = text_o2.innerHTML + " Critical"
+									text_o2.style.color = '#FF0000';
+								}
+								else if (((Math.round(data.ydata)) < 19) || ((Math.round(data.ydata)) > 26))
+								{
+									text_o2.innerHTML = text_o2.innerHTML + " Unsafe"
+									text_o2.style.color= '#FF6600';
+								}
+								else if (((Math.round(data.ydata)) < 23) && ((Math.round(data.ydata)) > 19))
+								{
+									text_o2.style.color= '#0000FF';
+								}
+								
+								if ((Math.round(data.ytdata)) < 30)
+								{
+									text_temp.style.color= '#1111FF';
+								}
+								else if ((Math.round(data.ytdata)) < 40)
+								{
+									text_temp.style.color= '#FF0600';
+								}
+								else
+								{
+									text_temp.style.color= '#FF0000';
+								}
+								
+							}
+							else
+							{
+								document.getElementById(meter_name).innerHTML = "-";
+								document.getElementById(meter_temp).innerHTML = "-";
+							}
+						}
+
+					}
+				},
+				error: function(xhr) {
+				}
+			});
+		}
+	</script>
+	
+</head>
+
+<body>
+
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			
+			setInterval(function() {
+				chartupdate(0);
+				chartupdate(1);
+				chartupdate(2);
+				chartupdate(3);
+				chartupdate(4);
+				chartupdate(5);
+				chartupdate(6);
+				chartupdate(7);
+				chartupdate(8);
+				chartupdate(9);
+				chartupdate(10);
+			}, 5000);
+
+		});
+	</script>
+	
+	<div id="title_all">
+		<div class ="legend"><font id = "legend" style="color: #000000; font-size: 180%">---</font></div>
+		<div class="title_bar"><center><h1 style="color: #000000; font-size: 200%">ADISENSE Oxygen (%Vol) and Temperature (&degC) Sensor : P2L3 Mechanical Room</h1></center></div>
+		<div class="time_text"><center><h1 style="color: #000000; font-size: 150%">Last Updated</h1></center></div>
+		<div class="time_holder"><center><font id = "time_data" style="color: #000000; font-size: 100%">---</font></center></div>
+	</div>
+	
+	
+	<div class="body_all">
+		<table class="numpanel" border = "1">
+			<tr height = "5%">
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 1</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_1" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 2</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_2" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 3</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_3" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 4</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_4" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 5</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_5" style="color: #000000; font-size:250% "> - </h2></center></td>
+			</tr>
+		</table>
+		<table class="numdata" border = "1">
+			<tr height = 45%>
+				<td class="numval" ><center><h1 id="sensor_val_1" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_2" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_3" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_4" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_5" style="color: #000000; font-size:500%">-</h1></center></td>
+			</tr>
+		</table>
+		<table class="numpanel" border = "1">
+			<tr height = 5% >
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 6</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_6" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 7</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_7" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 8</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_8" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 9</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_9" style="color: #000000; font-size:250% "> - </h2></center></td>
+				<td class="numsep" width="7%"><center><h2 style="color: #000000; font-size:200% "> Node 10</h2></center></td>
+				<td class="numsep" width="13%"><center><h2 id="temp_val_10" style="color: #000000; font-size:250% "> - </h2></center></td>
+			</tr>
+		</table>
+		<table class="numdata" border = "1">
+			<tr height = 45%>
+				<td class="numval" ><center><h1 id="sensor_val_6" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_7" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_8" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_9" style="color: #000000; font-size:500%">-</h1></center></td>
+				<td class="numval" ><center><h1 id="sensor_val_10" style="color: #000000; font-size:500%">-</h1></center></td>
+			</tr>
+		</table>
+	</div>
+	
+		
+</body>

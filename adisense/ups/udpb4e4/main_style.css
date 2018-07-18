@@ -1,0 +1,217 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	font-family: "Times New Roman", Times, Serif;
+	background: transparent;
+}
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#title_all {
+	height: 5%;
+	width: 100%;
+	margin: 0;
+	background: #000000;
+}
+.legend { 
+	height:7%;
+	width: 15%;
+	text-indent: 2em;
+	padding-top: .5%;
+	background: #000000;
+	float: left;
+	position: absolute;
+    top: 0%;
+	left: 0%;
+	
+}
+.title_bar {
+	height: 7%;
+	width: 71%;
+	padding-left: 0%;
+	background: radial-gradient(#3A3AAA, #000011);
+	float: left;
+	position: absolute;
+    top: 0%;
+	left: 15%;
+}
+.time_text {
+	height: 7%;
+	width: 9%;
+	padding-top: .5%;
+	background: #000000;
+	position: absolute;
+	float : left;
+	top: 0%;
+	left: 86%;
+}
+.time_holder {
+	height: 7%;
+	width: 5%;
+	padding-top: .5%;
+	background: #000000;
+	float : left;
+	position: absolute;
+	top: 0%;
+	left: 95%;
+}
+
+.body_all {	
+	height: 95%;
+	width: 100%;
+	padding-left: 0;
+	background: url(basement_udp_b4e4.jpg), radial-gradient( rgb(0, 0, 130), rgb(0, 0, 0));
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.sensor1 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #00FF00;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 25%;
+	right: 46.5%;
+}
+.sensor2 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #00FF00;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 25%;
+	left: 48.5%;
+}
+.sensor3 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #00FF00;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 25%;
+	left: 46%;
+}
+.sensor4 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #00FF00;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 44%;
+	left: 44.5%;
+}
+.sensor5 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #0000FF;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 65%;
+    right: 44%;
+}
+.sensor6 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #0000FF;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 65%;
+	left: 44%;
+}
+.sensor7 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #0000FF;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 86.5%;
+    left: 44%;
+}
+.sensor8 {
+	height: 32px;
+	width: 32px;
+	text-indent: .2%;
+	border: 3px solid #0000FF;
+	box-shadow: 0 0 2px #888;
+	background-color: #ff0000;
+	border-radius: 0%;
+    position: absolute;
+    top: 86.5%;
+    right: 44%;
+}
+
+.table_left{
+	text-indent: 10%;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+.table_right{
+	text-indent: 10%;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.rows1 {
+	border-top: 2px solid;
+	border-bottom: 2px solid;
+	border-color: #0000FF;
+	float: auto;
+	position: relative;
+}
+.rows2 {
+	border-top: 2px solid;
+	border-bottom: 2px solid;
+	border-color: #008800;
+	float: auto;
+	position: relative;
+}
+
+.values {
+	height: 100%;
+	width: 25%;
+	border-color: #00FF00;
+	float: right;
+}
+.values2 {
+	height: 100%;
+	width: 25%;
+	border-color: #0000FF;
+	float: left;
+}

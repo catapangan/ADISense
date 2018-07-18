@@ -1,0 +1,108 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	font-family: "Times New Roman", Times, Serif;
+	background: transparent;
+}
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#title_all {
+	height: 7%;
+	width: 100%;
+	margin: 0;
+	background: #FFFFFF;
+}
+.legend { 
+	height:7%;
+	width: 15%;
+	text-indent: 2em;
+	padding-top: .5%;
+	background: linear-gradient(to left, #F0F0F0, #8FFFFF);
+	float: left;
+	position: absolute;
+    top: 0%;
+	left: 0%;
+	
+}
+.title_bar {
+	height: 7%;
+	width: 71%;
+	padding-left: 0%;
+	background: linear-gradient(to right, #F0F0F0, #8FFFFF);
+	float: left;
+	position: absolute;
+    top: 0%;
+	left: 15%;
+}
+.time_text {
+	height: 7%;
+	width: 9%;
+	padding-top: .5%;
+	background:linear-gradient(to left, #F0F0F0, #8FFFFF);
+	position: absolute;
+	float : left;
+	top: 0%;
+	left: 86%;
+}
+.time_holder {
+	height: 7%;
+	width: 5%;
+	padding-top: .5%;
+	background: linear-gradient(to right, #F0F0F0, #8FFFFF);
+	float : left;
+	position: absolute;
+	top: 0%;
+	left: 95%;
+}
+.body_all {
+	height: 93%;
+	width: 100%;
+	position: relative;
+	padding: 0;
+	margin: 0;
+	float: left;
+	background: #FFFFFF;
+}
+.numpanel {
+	height: 8%;
+	width: 100%;
+	background: #000000;
+	position: relative;
+	float: left;
+	
+}
+.numdata {
+	height: 42%;
+	width: 100%;
+	background: #000000;
+	position: relative;
+	float: left;
+	
+}
+.numsep {
+	border-top: 2px solid;
+	border-color: #000000;
+	background: linear-gradient(#00FFFF, #008FFF);
+}
+td {
+	padding: 5px;
+}
+.numval {
+	background: linear-gradient(#FFFFFF, #CFFFFF);
+	padding-top: 4%;
+	float: center;
+	border-color: #000000;
+	width: 20%;
+}

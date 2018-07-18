@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<head>
+	
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	
+	<title>ADISENSE Temperature Sensor</title></title>
+	
+	<script src="jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="main_style.css">
+	
+	<script type="text/javascript">
+		
+		function chartupdate(ref_q) {
+			var url_string = "getSamples.php?q=" + ref_q + "&f=0&lt=0"; 
+			$.ajax({
+				async: true,
+				type: "GET",
+				url: url_string,
+				
+				success: function(data) {
+			
+					if (data.numsamples > 0)
+					{
+						var sense_box = "default"
+						var meter_name = "default";
+						if (ref_q == '0')
+						{
+							meter_name = "val_1";  
+							sense_box = "sensor_1";
+						}
+						else if (ref_q == '1')
+						{
+							meter_name = "val_2";  
+							sense_box = "sensor_2";
+						}
+						else if (ref_q == '2')
+						{
+							meter_name = "val_3"; 
+							sense_box = "sensor_3";
+						}
+						else if (ref_q == '3')
+						{
+							meter_name = "val_4"; 
+							sense_box = "sensor_4";
+						}
+						else if (ref_q == '4')
+						{
+							meter_name = "val_5"; 
+							sense_box = "sensor_5";
+						}
+						else if (ref_q == '5')
+						{
+							meter_name = "val_6"; 
+							sense_box = "sensor_6"; 
+						}
+						else if (ref_q == '6')
+						{
+							meter_name = "val_7";  
+							sense_box = "sensor_7";
+						}
+						else if (ref_q == '7')
+						{
+							meter_name = "val_8";  
+							sense_box = "sensor_8";
+						}
+						else if (ref_q == '8')
+						{
+							h = 14;
+							meter_name = "time_data";
+							var today = new Date(data.ydata);
+							today.setHours(today.getHours() + h);	
+								
+							var display_string = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear() + "  " + today.getHours() +":" +  today.getMinutes() + ":" + today.getSeconds();
+							document.getElementById(meter_name).innerHTML = display_string;
+						}
+						
+						if (ref_q != '8')
+						{
+							var display_string = Math.round(data.ydata * 10) / 10;
+							if ((Math.round(data.ydata)) < 20)
+							{
+								document.getElementById(meter_name).style.color= '#FFFFFF';
+								document.getElementById(sense_box).style.backgroundColor= '#FFFFFF';
+							}
+							else if ((Math.round(data.ydata)) < 30)
+							{
+								document.getElementById(meter_name).style.color= '#00FFFF';
+								document.getElementById(sense_box).style.backgroundColor= '#00FFFF';
+							}
+							else if ((Math.round(data.ydata)) < 60)
+							{
+								document.getElementById(meter_name).style.color= '#FF6600';
+								document.getElementById(sense_box).style.backgroundColor= '#FF6600';
+							}
+							else
+							{
+								document.getElementById(meter_name).style.color= '#FF0000';
+								document.getElementById(sense_box).style.backgroundColor= '#FF0000';
+							}
+							document.getElementById(meter_name).innerHTML = display_string.toFixed(1);
+						}
+					}
+				},
+				error: function(xhr) {
+				}
+			});
+		}
+	</script>
+	
+</head>
+<body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			
+			setInterval(function() {	
+				chartupdate('0');
+				chartupdate('1');
+				chartupdate('2');
+				chartupdate('3');
+				chartupdate('4');
+				chartupdate('5');
+				chartupdate('6');
+				chartupdate('7');
+				chartupdate('8');
+			}, 5000);
+
+		});
+	</script>
+	<div id = "title_all">
+		<div class ="legend"><font id = "legend" style="color: #FFFFFF; font-size: 180%">---</font></div>
+		<div class="title_bar"><center><h1 style="color: #FFFFFF; font-size: 200%">B1 Basement: UDP-B4E4 [&deg;C] </h1></center></div>
+		<div class="time_text"><center><h1 style="color: #FFFFFF; font-size: 100%">Last Updated:</h1></center></div>
+		<div class="time_holder"><center><font id = "time_data" style="color: #FFFFFF; font-size: 100%">---</h1></center></div>
+	</div>
+	<div class="body_all">
+	
+		 <div class="sensor1" id="sensor_1"><font style="color: #000000; font-size: 150%; margin-left: 10%">1</font></div>
+		 <div class="sensor2" id="sensor_2"><font style="color: #000000; font-size: 150%; margin-left: 10%">2</font></div>
+		 <div class="sensor3" id="sensor_3"><font style="color: #000000; font-size: 150%; margin-left: 10%">3</font></div>
+		 <div class="sensor4" id="sensor_4"><font style="color: #000000; font-size: 150%; margin-left: 10%">4</font></div>
+		 <div class="sensor5" id="sensor_5"><font style="color: #000000; font-size: 150%; margin-left: 10%">1</font></div>
+		 <div class="sensor6" id="sensor_6"><font style="color: #000000; font-size: 150%; margin-left: 10%">2</font></div>
+		 <div class="sensor7" id="sensor_7"><font style="color: #000000; font-size: 150%; margin-left: 10%">3</font></div>
+		 <div class="sensor8" id="sensor_8"><font style="color: #000000; font-size: 150%; margin-left: 10%">4</font></div>
+		
+		<div class="values2">
+			<table class="table_left" >
+				<tr size = "200%">
+					<td class="rows2" width="13%"><font style="color: #FFFFFF; font-size:300% "> Sensor 1</h2></td>
+					<td class="rows2" width="12%"><center><font id="val_1" style="color: #FFFFFF; font-size:700%">-</font></center></td>
+				</tr>
+				<tr size = "200%">
+					<td class="rows2" width="13%"><h2 style="color: #FFFFFF;  font-size:300% "> Sensor 2</h2></td>
+					<td class="rows2" width="12%"><center><center><font id="val_2" style="color: #00FFFF; font-size:700%">-</font></center></td>
+				</tr>
+				<tr size = "200%">
+					<td class="rows2" width="13%"><h2 style="color: #FFFFFF; font-size:300% "> Sensor 3</h2></td>
+					<td class="rows2" width="12%"><center><font id="val_3" style="color: #FF6600; font-size:700%">-</font></center></td>
+				</tr>
+				<tr size = "200%">
+					<td class="rows2" width="13%"><h2 style="color: #FFFFFF;  font-size:300% "> Sensor 4</h2></td>
+					<td class="rows2" width="12%"><center><font id="val_4" style="color: #FF0000; font-size:700%">-</font></center></td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="values">
+			<table class="table_right" >
+				<tr size = "200%">
+					<td class="rows1" width="12%"><center><font id="val_5" style="color: #FFFFFF; font-size:700%">-</font></center></td>
+					<td class="rows1" width="13%"><font style="color: #FFFFFF; font-size:300% "> Sensor 1</h2></td>
+				</tr>
+				<tr size = "200%">
+					<td class="rows1" width="12%"><center><center><font id="val_6" style="color: #00FFFF; font-size:700%">-</font></center></td>
+					<td class="rows1" width="13%"><h2 style="color: #FFFFFF; font-size:300% "> Sensor 2</h2></td>
+				</tr>
+				<tr size = "200%">
+					<td class="rows1" width="12%"><center><font id="val_7" style="color: #FF6600; font-size:700%">-</font></center></td>
+					<td class="rows1" width="13%"><h2 style="color: #FFFFFF; font-size:300% "> Sensor 3</h2></td>
+				</tr>
+				<tr size = "200%">
+					<td class="rows1" width="12%"><center><font id="val_8" style="color: #FF0000; font-size:700%">-</font></center></td>
+					<td class="rows1" width="13%"><h2 style="color: #FFFFFF; font-size:300% "> Sensor 4</h2></td>
+				</tr>
+			</table>
+		</div>
+		
+		 
+	</div>
+
+	
+		
+</body>
